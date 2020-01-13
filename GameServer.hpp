@@ -59,24 +59,24 @@ enum EndType {
  *玩家結構
  *TODO 轉成 class 提升資料安全性
  */
-/*
-struct Player
-{
-	int index;							//連線用 SQL 中的玩家#數
-	int score = 0;						//分數
-	bool state = true;				//存取此回合是否繼續探險
+ /*
+ struct Player
+ {
+	 int index;							//連線用 SQL 中的玩家#數
+	 int score = 0;						//分數
+	 bool state = true;				//存取此回合是否繼續探險
 
-	Player() {}
-	Player(int id) {
-		index = id;
-	}
-	void restart() {
-		state = true;
-	}
-	void addScore(int s) {
-		score += s;
-	}
-};*/
+	 Player() {}
+	 Player(int id) {
+		 index = id;
+	 }
+	 void restart() {
+		 state = true;
+	 }
+	 void addScore(int s) {
+		 score += s;
+	 }
+ };*/
 
 struct Card
 {
@@ -477,7 +477,7 @@ struct Room
 			if (it != lengh)
 				msg += ";";
 		}
-		if(end == 0)
+		if (end == 0)
 			doBroadcast(PLAYERLISTFULL + msg);		//遊戲中
 		else
 			doBroadcast(GAME_END + msg);				//結束用
@@ -494,9 +494,6 @@ struct Room
 		return currentAdvanturePlayer.end();
 	}
 };
-
-
-
 
 /*
  * 遊戲規則 移植到客戶端

@@ -41,7 +41,6 @@ int main(int argc, char **argv) {
 	//SOCKET sockfd;				/* 紀錄 socket 代號	(改成全域)	*/
 	WSADATA wsa;					/*	網路環境				*/
 
-
 	/*		Socket environment setup	*/
 	std::cerr << "初始化socket環境中...  ";
 	if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
@@ -67,7 +66,7 @@ int main(int argc, char **argv) {
 	server.sin_port = htons(PORT);				//port 預設 : 7171
 	std::cerr << "[完成]" << std::endl;
 	/* 綁定本地 IP/Port */
-	if (bind(sockfd, (struct sockaddr *)&server, length) != 0){
+	if (bind(sockfd, (struct sockaddr *)&server, length) != 0) {
 		perror("綁定 Socket 失敗. ");
 		exit(EXIT_FAILURE);
 	}
@@ -113,7 +112,7 @@ int main(int argc, char **argv) {
 				doSendPacket(*it, GETCHOSE);
 			}
 			//等待所有玩家回應 (沒回應的都為 回家) 20s
-			for (int i = 0; i < 40; i++) 
+			for (int i = 0; i < 40; i++)
 			{
 				Sleep(WAIT_CHOSE_DELAY);
 				if (logs.size() == room.getAdventureNumber())	//所有玩家都選擇了
@@ -168,7 +167,6 @@ int main(int argc, char **argv) {
 	WSACleanup();
 	return 0;
 }
-
 
 /*
  * 除錯訊息

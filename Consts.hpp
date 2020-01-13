@@ -41,7 +41,7 @@ struct CLIENT
 	bool state = true;				/*		紀錄本回合是否探險	*/
 	CLIENT() {}
 	CLIENT(struct sockaddr_in sock) :_sock(sock) {}
-	void setup(char* ip, struct sockaddr_in sock, std::string name){
+	void setup(char* ip, struct sockaddr_in sock, std::string name) {
 		//strcpy_(_ip, ip);
 		_sock = sock;
 		_name = name;
@@ -68,9 +68,9 @@ struct CLIENT
 std::vector<CLIENT> users;
 
 /*		TRUE/FALSE	*/
-enum Chose { 
-	F = 0, 
-	T = 1 
+enum Chose {
+	F = 0,
+	T = 1
 };
 
 #define WAIT_DELAY 500	//等待封包間隔
@@ -115,7 +115,7 @@ void commandHandle(const std::string cmd, const struct sockaddr_in sock) {
 	int size = v_cmd.size();
 	if (size < 1) { return; }	//DROP
 	//玩家加入房間
-	if (size == 2 && v_cmd[0] == NAME)	{
+	if (size == 2 && v_cmd[0] == NAME) {
 		CLIENT nClient; nClient.setup((char*)"", sock, v_cmd[1]);
 		users.push_back(nClient);
 		std::cerr << "新玩家加入!!" << std::endl;
