@@ -25,8 +25,7 @@ void recv_thread(void *param) {
 			perror("recvform() failed.");
 			return;
 		}
-		printf("接收到 -> %s \n", buf);
-
+		//printf("接收到 -> %s \n", buf);
 		//指令處理
 		commandHandle(buf, local);
 	}
@@ -132,11 +131,14 @@ int main(int argc, char **argv) {
 				}
 			}
 			/*		對玩家所做的選擇做調整		*/
-			for (auto it = room.currentAdvanturePlayer.begin(); it != room.currentAdvanturePlayer.end(); it++)
+			for (auto it = room.currentAdvanturePlayer.begin(); it != room.currentAdvanturePlayer.end();)
 			{
 				if ((*it).state == false) {
 					room.currentBackPlayer.insert(room.currentBackPlayer.end(), *it);
 					it = room.currentAdvanturePlayer.erase(it);
+				}
+				else {
+					it++;
 				}
 			}
 			std::cout << "此次回家人數: " << room.getBackNumber() << "     繼續冒險人數: " << room.getAdventureNumber() << " \n";

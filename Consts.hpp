@@ -28,7 +28,8 @@ SOCKET sockfd;					/* 紀錄 socket 代號		*/
 std::vector<std::string> commandParser(const std::string);
 void commandHandle(const std::string, const struct sockaddr_in);
 void doBroadcast(std::string);
-//std::string Int_to_String(int);
+std::string Int_to_String(int);
+void doBroadcastPlayerList();
 
 struct CLIENT
 {
@@ -118,6 +119,7 @@ void commandHandle(const std::string cmd, const struct sockaddr_in sock) {
 		CLIENT nClient; nClient.setup((char*)"", sock, v_cmd[1]);
 		users.push_back(nClient);
 		std::cerr << "新玩家加入!!" << std::endl;
+		doBroadcastPlayerList();
 		return;
 	}
 	//等待玩家狀態
@@ -147,7 +149,6 @@ void sendPlayerList() {
 	}
 	doBroadcast(PLAYERLIST + list);
 }
-
 /*
  * 解析指令
  * @param command 要分割的字串
@@ -181,15 +182,20 @@ void doBroadcast(std::string msg) {
 		(*it).sendPacket(msg);
 	}
 }
-
-
-
-
-
-
-
-
-
+/*
+ * 對所有玩家廣播玩家清單
+ */
+void doBroadcastPlayerList() {
+	std::string msg = "";
+	int size = users.size();
+	for (int i = 0; i < size; i++)
+	{
+		msg += users[i]._name;
+		if (i != size)
+			msg += ";";
+	}
+	doBroadcast(PLAYERLIST + msg);
+}
 /*
 	錯誤處理
 	@param err_msg 錯誤訊息.
