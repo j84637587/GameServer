@@ -105,7 +105,6 @@ struct LOG
 	bool state;
 };
 std::vector<LOG> logs;
-int log_count = 0;
 /*
  * 辨識指令並做出相對應處理
  * @param cmd 要辨識的字串指令
@@ -131,7 +130,7 @@ void commandHandle(const std::string cmd, const struct sockaddr_in sock) {
 		else
 			log.state = true;
 		std::cerr << "有玩家選擇了 " << log.state << std::endl;
-		log_count++;
+		logs.push_back(log);
 	}
 	return;
 }
